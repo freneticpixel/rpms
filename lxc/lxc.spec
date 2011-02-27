@@ -1,5 +1,5 @@
 Name:           lxc
-Version:        0.7.3
+Version:        0.7.4
 Release:        1%{?dist}
 Summary:        Linux Resource Containers
 
@@ -120,8 +120,8 @@ rm -rf %{buildroot}
 %{_docdir}/%{name}
 
 %changelog
-* Sat Jan 08 2011 Silas Sewell <silas@sewell.ch> - 0.7.3-1
-- Update to latest version
+* Sat Feb 26 2011 Silas Sewell <silas@sewell.ch> - 0.7.4-1
+- Update to 0.7.4
 
 * Mon Jul 26 2010 Silas Sewell <silas@sewell.ch> - 0.7.2-1
 - Update to 0.7.2
