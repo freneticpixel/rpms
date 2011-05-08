@@ -8,7 +8,7 @@ Summary:          A small LDAP daemon
 Group:            System Environment/Daemons
 License:          MIT
 URL:              http://www.bzero.se/ldapd/
-Source0:          http://bitbucket.org/bzero/ldapd-portable/get/%{changeset}.tar.bz2
+Source0:          https://bitbucket.org/bzero/ldapd-portable/get/%{changeset}.tar.bz2
 Source1:          %{name}.conf
 Source2:          %{name}.init
 # elinks http://www.bzero.se/ldapd/ > README
@@ -31,7 +31,7 @@ Requires(preun):  initscripts
 ldapd is a daemon which implements version 3 of the LDAP protocol.
 
 %prep
-%setup -q -n ldapd-portable
+%setup -q -n bzero-ldapd-portable-%{changeset}
 %patch0 -p1
 cp -p %{SOURCE10} README
 

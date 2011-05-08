@@ -1,0 +1,11 @@
+[Unit]
+Description=Application Server for STOMP based agents
+After=syslog.target network.target
+
+[Service]
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/usr/sbin/mcollectived --config=/etc/mcollective/server.cfg
+
+[Install]
+WantedBy=multi-user.target

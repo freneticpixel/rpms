@@ -1,0 +1,11 @@
+diff -up nova-2011.1.1/setup.py.orig nova-2011.1.1/setup.py
+--- nova-2011.1.1/setup.py.orig	2011-03-29 19:48:30.804999156 -0400
++++ nova-2011.1.1/setup.py	2011-03-29 19:49:05.335823504 -0400
+@@ -33,7 +33,6 @@ assert DistUtilsExtra.auto.__version__ >
+        'needs DistUtilsExtra.auto >= 2.18'
+ 
+ 
+-from nova.utils import parse_mailmap, str_dict_replace
+ from nova import version
+ 
+ if os.path.isdir('.bzr'):

@@ -1,12 +1,10 @@
-%global with_doc 1
-
 %if ! (0%{?fedora} > 12 || 0%{?rhel} > 5)
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
 %endif
 
 Name:             openstack-nova
-Version:          2010.1
-Release:          2%{?dist}
+Version:          2011.1.1
+Release:          1%{?dist}
 Summary:          OpenStack Compute (nova)
 
 Group:            Development/Languages
@@ -29,10 +27,14 @@ Source13:         %{name}-scheduler.init
 Source14:         %{name}-volume.conf
 Source15:         %{name}-volume.init
 Source20:         %{name}-sudoers
+Patch0:           nova-2011.1.1-setup.py.patch
 BuildRoot:        %{_tmppath}/nova-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:        noarch
+BuildRequires:    intltool
 BuildRequires:    python-devel
+BuildRequires:    python-distutils-extra
+BuildRequires:    python-gflags
 BuildRequires:    python-setuptools
 
 Requires:         python-nova = %{version}-%{release}
@@ -185,39 +187,9 @@ protocol, and the Redis KVS.
 
 This package contains the %{name} volume server.
 
-%if 0%{?with_doc}
-%package doc
-Summary:          Documentation for %{name}
-Group:            Documentation
-
-BuildRequires:    python-sphinx
-# Required to build module documents
-BuildRequires:    python-IPy
-BuildRequires:    python-boto
-#BuildRequires:    python-carrot
-BuildRequires:    python-daemon
-BuildRequires:    python-eventlet
-#BuildRequires:    python-gflags
-#BuildRequires:    python-mox
-#BuildRequires:    python-redis
-BuildRequires:    python-routes
-BuildRequires:    python-sqlalchemy
-BuildRequires:    python-tornado
-BuildRequires:    python-twisted-core
-BuildRequires:    python-twisted-web
-BuildRequires:    python-webob
-
-%description      doc
-Nova is a cloud computing fabric controller (the main part of an IaaS system)
-built to match the popular AWS EC2 and S3 APIs. It is written in Python, using
-the Tornado and Twisted frameworks, and relies on the standard AMQP messaging
-protocol, and the Redis KVS.
-
-This package contains documentation files for %{name}.
-%endif
-
 %prep
 %setup -q -n nova-%{version}
+%patch0 -p1
 
 %build
 %{__python} setup.py build
@@ -225,16 +197,6 @@ This package contains documentation files for %{name}.
 %install
 rm -rf %{buildroot}
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
-
-%if 0%{?with_doc}
-export PYTHONPATH="$( pwd ):$PYTHONPATH"
-pushd doc
-sphinx-build -b html source build/html
-popd
-
-# Fix hidden-file-or-dir warnings
-rm -fr doc/build/html/.doctrees doc/build/html/.buildinfo
-%endif
 
 # Setup directories
 install -d -m 755 %{buildroot}%{_sysconfdir}/nova
@@ -275,15 +237,15 @@ install -p -D -m 644 %{SOURCE14} %{buildroot}%{_sysconfdir}/nova/nova-volume.con
 install -d -m 755 %{buildroot}%{_localstatedir}/run/nova
 
 # Install template files
-install -p -D -m 644 nova/auth/novarc.template %{buildroot}%{_datarootdir}/nova/novarc.template
-install -p -D -m 644 nova/cloudpipe/client.ovpn.template %{buildroot}%{_datarootdir}/nova/client.ovpn.template
-install -p -D -m 644 nova/virt/libvirt.qemu.xml.template %{buildroot}%{_datarootdir}/nova/libvirt.qemu.xml.template
-install -p -D -m 644 nova/virt/libvirt.uml.xml.template %{buildroot}%{_datarootdir}/nova/libvirt.uml.xml.template
-install -p -D -m 644 nova/virt/interfaces.template %{buildroot}%{_datarootdir}/nova/interfaces.template
+install -p -D -m 644 nova/virt/libvirt.xml.template %{buildroot}%{_datarootdir}/nova/libvirt.xml.template
 
 # Clean CA directory
 find %{buildroot}%{_sharedstatedir}/nova/CA -name .gitignore -delete
 find %{buildroot}%{_sharedstatedir}/nova/CA -name .placeholder -delete
+
+# Remove test runner
+rm -f %{buildroot}%{python_sitelib}/run_tests.py*
+rm -f %{buildroot}%{_sysconfdir}/nova-api.conf
 
 %clean
 rm -rf %{buildroot}
@@ -360,6 +322,7 @@ fi
 %dir %attr(0755, nova, root) %{_localstatedir}/run/nova
 %{_bindir}/nova-manage
 %{_datarootdir}/nova
+%{_docdir}/nova
 %defattr(-,nova,nobody,-)
 %{_sharedstatedir}/nova
 
@@ -412,13 +375,10 @@ fi
 %{_bindir}/nova-volume
 %{_initrddir}/%{name}-volume
 
-%if 0%{?with_doc}
-%files doc
-%defattr(-,root,root,-)
-%doc LICENSE doc/build/html
-%endif
-
 %changelog
+* Tue Mar 29 2011 Silas Sewell <silas@sewell.ch> - 2011.1.1-1
+- Update to 2011.1.1
+
 * Thu Nov 04 2010 Silas Sewell <silas@sewell.ch> - 2010.1-2
 - Fix various issues (init, permissions, config, etc..)
 

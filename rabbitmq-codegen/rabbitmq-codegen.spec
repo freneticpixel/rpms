@@ -1,16 +1,14 @@
-%global changeset b20a37b1bee4
+%global changeset 14faedb58703
 
 Name:             rabbitmq-codegen
 Version:          0
-Release:          0.1.%{changeset}%{?dist}
+Release:          0.2.%{changeset}%{?dist}
 Summary:          RabbitMQ code-generation tool
 
 Group:            Development/Libraries
 License:          MPLv1.1
 URL:              http://hg.rabbitmq.com/rabbitmq-c
 Source0:          http://hg.rabbitmq.com/rabbitmq-codegen/archive/%{changeset}.tar.bz2
-Patch0:           %{name}-b20a37b1bee4-fix-script-without-shebang.patch
-
 BuildArch:        noarch
 
 Requires:         python
@@ -20,7 +18,6 @@ RabbitMQ protocol code-generation and machine-readable spec.
 
 %prep
 %setup -q -n %{name}-%{changeset}
-%patch0 -p1
 
 %build
 
@@ -37,5 +34,8 @@ done
 %{_datarootdir}/%{name}/*.py*
 
 %changelog
+* Sat Apr 30 2011 Silas Sewell <silas@sewell.ch> - 0-0.2.14faedb58703
+- Update to latest build
+
 * Wed Dec 29 2010 Silas Sewell <silas@sewell.ch> - 0-0.1.b20a37b1bee4
 - Initial build

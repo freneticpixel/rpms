@@ -1,5 +1,5 @@
 Name:           zeromq
-Version:        2.0.10
+Version:        2.1.3
 Release:        1%{?dist}
 Summary:        Software library for fast, message-based applications
 
@@ -12,6 +12,9 @@ Source0:        http://download.zeromq.org/zeromq-%{version}.tar.gz
 BuildRequires:  glib2-devel
 BuildRequires:  libuuid-devel
 
+# utils subpackage was removed in F-16
+# -> can be deleted in F-19
+Obsoletes:      zeromq-utils < 2.1.3-1
 
 %description
 The 0MQ lightweight messaging kernel is a library which extends the
@@ -27,23 +30,12 @@ This package contains the ZeroMQ shared library.
 %package devel
 Summary:        Development files for %{name}
 Group:          Development/Libraries
-Requires:       %{name} = %{version}-%{release}
+Requires:       %{name}%{?_isa} = %{version}-%{release}
 
 
 %description devel
 The %{name}-devel package contains libraries and header files for 
 developing applications that use %{name}.
-
-
-%package utils
-Summary:        Utility files for %{name}
-Group:          Development/Tools
-Requires:       %{name} = %{version}-%{release}
-
-
-%description utils
-This package contains ZeroMQ related utility files,
-e.g. zmq_forwarder, zmq_streamer and zmq_queue.
 
 
 %prep
@@ -78,19 +70,24 @@ rm %{buildroot}%{_libdir}/libzmq.la
 %{_libdir}/libzmq.so
 %{_libdir}/pkgconfig/libzmq.pc
 %{_includedir}/zmq*
-%{_mandir}/man1/zmq*
 %{_mandir}/man3/zmq*
 %{_mandir}/man7/zmq*
 
 
-%files utils
-%defattr(-,root,root,-)
-%{_bindir}/zmq_forwarder
-%{_bindir}/zmq_queue
-%{_bindir}/zmq_streamer
-
-
 %changelog
+* Wed Mar 23 2011 Thomas Spura <tomspur@fedoraproject.org> - 2.1.3-1
+- update to new version (#690199)
+- utils subpackage was removed upstream
+  (obsolete it)
+
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.0.10-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Thu Jan 13 2011 Pavel Zhukov <pavel@zhukoff.net> - 2.0.10-1
+- update version
+- add rpath delete
+- change includedir filelist
+
 * Fri Dec 24 2010 Silas Sewell <silas@sewell.ch> - 2.0.10-1
 - Update to 2.0.10
 
