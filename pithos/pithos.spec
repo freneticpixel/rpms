@@ -1,12 +1,12 @@
 Name:           pithos
-Version:        0.3.10
+Version:        0.3.11
 Release:        1%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
 License:        GPLv3
 URL:            http://kevinmehall.net/p/pithos/
-# bzr branch lp:pithos pithos-%{version} -r 165
+# bzr branch lp:pithos pithos-%{version} -r 170
 # tar -cjf pithos-%{version}.tar.bz2 pithos-%{version}/
 Source0:        pithos-%{version}.tar.bz2
 
@@ -53,7 +53,6 @@ sed -i '/^#!\/usr\/bin\/python$/,+1 d' \
 # Install icon
 desktop-file-install --delete-original \
                      --dir %{buildroot}%{_datadir}/applications \
-                     --add-only-show-in=GNOME \
                      %{name}.desktop
 
 %files
@@ -66,6 +65,9 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Thu Sep 22 2011 Silas Sewell <silas@sewell.org> - 0.3.11
+- Update to 0.3.11
+
 * Mon Jul 11 2011 Silas Sewell <silas@sewell.ch> - 0.3.10
 - Update to 0.3.10
 
