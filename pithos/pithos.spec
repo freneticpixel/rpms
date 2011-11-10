@@ -1,6 +1,6 @@
 Name:           pithos
 Version:        0.3.13
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
@@ -9,7 +9,10 @@ URL:            http://kevinmehall.net/p/pithos/
 # bzr branch lp:pithos pithos-%{version} -r 176
 # tar -cjf pithos-%{version}.tar.bz2 pithos-%{version}/
 Source0:        pithos-%{version}.tar.bz2
+# Fix desktop icon location
 Patch0:         fix-pithos-desktop.patch
+# Use site-package pylast
+Patch1:         site-package-pylast.patch
 
 BuildArch:      noarch
 BuildRequires:  desktop-file-utils
@@ -24,6 +27,7 @@ Requires:       gstreamer-python
 Requires:       notify-python
 Requires:       pygobject2
 Requires:       pygtk2
+Requires:       pylast
 Requires:       pyxdg
 
 %description
@@ -36,8 +40,8 @@ It is recommended that you purchase a Pandora One membership.
 
 %prep
 %setup -q
-# Fix desktop icon
 %patch0 -p1
+%patch1 -p1
 # Copy desktop file before setup.py mangles it
 cp %{name}.desktop.in %{name}.desktop
 # Fix data path
@@ -53,6 +57,8 @@ sed -i '/^#!\/usr\/bin\/python$/,+1 d' \
 
 %install
 %{__python} setup.py install -O1 --skip-build --prefix=%{buildroot}%{_prefix}
+# Remove packaged pylast
+rm -fr %{buildroot}%{python_sitelib}/%{name}/pylast.py*
 # Install icon
 desktop-file-install --delete-original \
                      --dir=%{buildroot}%{_datadir}/applications \
@@ -68,23 +74,26 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
-* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.13
+* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.13-2
+- Remove packaged pylast
+
+* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.13-1
 - Update to 0.3.13
 - Use SSL for login (fixes AUTH_WEB_LOGIN_NOT_ALLOWED)
 - Fix icon
 
-* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.12
+* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.12-1
 - Update to 0.3.12
 - Update keys and to protocol v33
 
-* Thu Sep 22 2011 Silas Sewell <silas@sewell.org> - 0.3.11
+* Thu Sep 22 2011 Silas Sewell <silas@sewell.org> - 0.3.11-1
 - Update to 0.3.11
 
-* Mon Jul 11 2011 Silas Sewell <silas@sewell.ch> - 0.3.10
+* Mon Jul 11 2011 Silas Sewell <silas@sewell.ch> - 0.3.10-1
 - Update to 0.3.10
 
-* Wed Apr 29 2011 Silas Sewell <silas@sewell.ch> - 0.3.9
+* Wed Apr 29 2011 Silas Sewell <silas@sewell.ch> - 0.3.9-1
 - Update to 0.3.9
 
-* Tue Nov 30 2010 Silas Sewell <silas@sewell.ch> - 0.3.6
+* Tue Nov 30 2010 Silas Sewell <silas@sewell.ch> - 0.3.6-1
 - Initial package

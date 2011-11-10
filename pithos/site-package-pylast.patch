@@ -1,0 +1,12 @@
+diff -up pithos-0.3.13/pithos/plugins/scrobble.py.orig pithos-0.3.13/pithos/plugins/scrobble.py
+--- pithos-0.3.13/pithos/plugins/scrobble.py.orig	2011-11-09 22:04:51.747842390 -0500
++++ pithos-0.3.13/pithos/plugins/scrobble.py	2011-11-09 22:04:59.481873087 -0500
+@@ -15,7 +15,7 @@
+ #with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ### END LICENSE
+ 
+-from pithos import pylast
++import pylast
+ import webbrowser
+ import logging
+ from pithos.gobject_worker import GObjectWorker
