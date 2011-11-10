@@ -1,14 +1,15 @@
 Name:           pithos
-Version:        0.3.12
+Version:        0.3.13
 Release:        1%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
 License:        GPLv3
 URL:            http://kevinmehall.net/p/pithos/
-# bzr branch lp:pithos pithos-%{version} -r 174
+# bzr branch lp:pithos pithos-%{version} -r 176
 # tar -cjf pithos-%{version}.tar.bz2 pithos-%{version}/
 Source0:        pithos-%{version}.tar.bz2
+Patch0:         fix-pithos-desktop.patch
 
 BuildArch:      noarch
 BuildRequires:  desktop-file-utils
@@ -35,6 +36,8 @@ It is recommended that you purchase a Pandora One membership.
 
 %prep
 %setup -q
+# Fix desktop icon
+%patch0 -p1
 # Copy desktop file before setup.py mangles it
 cp %{name}.desktop.in %{name}.desktop
 # Fix data path
@@ -52,7 +55,7 @@ sed -i '/^#!\/usr\/bin\/python$/,+1 d' \
 %{__python} setup.py install -O1 --skip-build --prefix=%{buildroot}%{_prefix}
 # Install icon
 desktop-file-install --delete-original \
-                     --dir %{buildroot}%{_datadir}/applications \
+                     --dir=%{buildroot}%{_datadir}/applications \
                      %{name}.desktop
 
 %files
@@ -65,6 +68,11 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.13
+- Update to 0.3.13
+- Use SSL for login (fixes AUTH_WEB_LOGIN_NOT_ALLOWED)
+- Fix icon
+
 * Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.12
 - Update to 0.3.12
 - Update keys and to protocol v33

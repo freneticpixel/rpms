@@ -1,0 +1,11 @@
+diff -up pithos-0.3.13/pithos.desktop.in.orig pithos-0.3.13/pithos.desktop.in
+--- pithos-0.3.13/pithos.desktop.in.orig	2011-11-09 21:47:28.262874762 -0500
++++ pithos-0.3.13/pithos.desktop.in	2011-11-09 21:48:34.453128043 -0500
+@@ -3,6 +3,6 @@ Name=Pithos
+ Comment=Play music from Pandora Radio
+ Categories=GNOME;AudioVideo;
+ Exec=pithos
+-Icon=pithos
++Icon=/usr/share/pithos/media/icon.png
+ Terminal=false
+ Type=Application
