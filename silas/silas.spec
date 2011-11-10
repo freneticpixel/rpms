@@ -22,10 +22,15 @@ Silas's standard packages.
 
 %package dev
 Summary:        Development packages
+Requires:       bison
+Requires:       bzr
 Requires:       fedpkg
 Requires:       gcc
 Requires:       gcc-c++
+Requires:       make
+Requires:       mercurial
 Requires:       mock
+Requires:       openssl-devel
 Requires:       python-devel
 Requires:       python-virtualenv
 Requires:       rpmdevtools
