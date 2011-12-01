@@ -1,8 +1,8 @@
-%global changeset ab5bd3b3f8cc
+%global changeset 7cecf64752fd
 
 Name:             rabbitmq-c
 Version:          0
-Release:          0.2.%{changeset}%{?dist}
+Release:          0.3.%{changeset}%{?dist}
 Summary:          RabbitMQ C client
 
 Group:            Development/Libraries
@@ -58,6 +58,9 @@ autoreconf -i
 %{_libdir}/librabbitmq.so
 
 %changelog
+* Thu Dec 01 2011 Silas Sewell <silas@sewell.org> - 0-0.3.7cecf64752fd
+- Update to latest build
+
 * Sat Apr 30 2011 Silas Sewell <silas@sewell.ch> - 0-0.2.ab5bd3b3f8cc
 - Initial build
 

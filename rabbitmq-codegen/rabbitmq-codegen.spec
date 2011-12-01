@@ -1,13 +1,13 @@
-%global changeset 14faedb58703
+%global changeset 82b642218623
 
 Name:             rabbitmq-codegen
 Version:          0
-Release:          0.2.%{changeset}%{?dist}
+Release:          0.3.%{changeset}%{?dist}
 Summary:          RabbitMQ code-generation tool
 
 Group:            Development/Libraries
 License:          MPLv1.1
-URL:              http://hg.rabbitmq.com/rabbitmq-c
+URL:              http://hg.rabbitmq.com/rabbitmq-codegen
 Source0:          http://hg.rabbitmq.com/rabbitmq-codegen/archive/%{changeset}.tar.bz2
 BuildArch:        noarch
 
@@ -34,6 +34,9 @@ done
 %{_datarootdir}/%{name}/*.py*
 
 %changelog
+* Thu Dec 01 2011 Silas Sewell <silas@sewell.org> - 0-0.3.82b642218623
+- Update to latest build
+
 * Sat Apr 30 2011 Silas Sewell <silas@sewell.ch> - 0-0.2.14faedb58703
 - Update to latest build
 
