@@ -1,12 +1,12 @@
 Name:           pithos
-Version:        0.3.13
-Release:        2%{?dist}
+Version:        0.3.14
+Release:        1%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
 License:        GPLv3
 URL:            http://kevinmehall.net/p/pithos/
-# bzr branch lp:pithos pithos-%{version} -r 176
+# bzr branch lp:pithos pithos-%{version} -r 181
 # tar -cjf pithos-%{version}.tar.bz2 pithos-%{version}/
 Source0:        pithos-%{version}.tar.bz2
 # Fix desktop icon location
@@ -74,6 +74,10 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Fri Dec 16 2011 Silas Sewell <silas@sewell.org> - 0.3.14-1
+- Update to 0.3.14 (revision 181)
+- Fix "You have no chance to survive make your time"
+
 * Wed Nov 09 2011 Silas Sewell <silas@sewell.org> - 0.3.13-2
 - Remove packaged pylast
 
