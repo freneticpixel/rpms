@@ -1,6 +1,6 @@
 Name:           pithos
 Version:        0.3.14
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
@@ -61,6 +61,7 @@ sed -i '/^#!\/usr\/bin\/python$/,+1 d' \
 rm -fr %{buildroot}%{python_sitelib}/%{name}/pylast.py*
 # Install icon
 desktop-file-install --delete-original \
+                     --add-category="GTK" \
                      --dir=%{buildroot}%{_datadir}/applications \
                      %{name}.desktop
 
@@ -74,6 +75,9 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Sat Dec 17 2011 Silas Sewell <silas@sewell.org> - 0.3.14-2
+- Add GTK category
+
 * Fri Dec 16 2011 Silas Sewell <silas@sewell.org> - 0.3.14-1
 - Update to 0.3.14 (revision 181)
 - Fix "You have no chance to survive make your time"
