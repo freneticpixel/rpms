@@ -2,5 +2,6 @@
 *.gz
 *.rpm
 *.swp
+*.tgz
 build
 tmp
