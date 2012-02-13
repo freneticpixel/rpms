@@ -9,8 +9,8 @@ URL:              https://www.tarsnap.com/
 Source0:          https://www.tarsnap.com/download/%{name}-autoconf-%{version}.tgz
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
-BuildRequires: e2fsprogs-devel
-BuildRequires: openssl-devel
+BuildRequires:    e2fsprogs-devel
+BuildRequires:    openssl-devel
 
 %description
 Tarsnap is a secure online backup service for BSD, Linux, OS X, Solaris,
