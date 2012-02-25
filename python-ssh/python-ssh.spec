@@ -5,7 +5,7 @@ Version:        1.7.13
 Release:        1%{?dist}
 Summary:        A Python SSH2 library
 
-Group:          Applications/System
+Group:          Development/Languages
 License:        LGPLv2+
 URL:            https://github.com/bitprophet/ssh
 Source0:        http://pypi.python.org/packages/source/s/ssh/ssh-%{version}.tar.gz
