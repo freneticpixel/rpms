@@ -1,6 +1,6 @@
 Name:           pithos
 Version:        0.3.16
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
@@ -13,6 +13,8 @@ Source0:        pithos-%{version}.tar.bz2
 Patch0:         fix-pithos-desktop.patch
 # Use site-package pylast
 Patch1:         site-package-pylast.patch
+# Fix time sync
+Patch2:         time-sync-hack.patch
 
 BuildArch:      noarch
 BuildRequires:  desktop-file-utils
@@ -42,6 +44,7 @@ It is recommended that you purchase a Pandora One membership.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 # Copy desktop file before setup.py mangles it
 cp %{name}.desktop.in %{name}.desktop
 # Fix data path
@@ -75,6 +78,9 @@ desktop-file-install --delete-original \
 %{_datadir}/applications/%{name}.desktop
 
 %changelog
+* Sun Apr 29 2012 Silas Sewell <silas@sewell.org> - 0.3.16-2
+- Get sync time from JJZ's server (James Burton)
+
 * Wed Apr 25 2012 Silas Sewell <silas@sewell.org> - 0.3.16-1
 - Update to 0.3.16
 
