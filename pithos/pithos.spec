@@ -1,20 +1,21 @@
+%global commit d66ff7a
+
 Name:           pithos
-Version:        0.3.16
-Release:        2%{?dist}
+Version:        0.3.17
+Release:        0.1.%{commit}%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
 License:        GPLv3
 URL:            http://kevinmehall.net/p/pithos/
-# bzr branch lp:pithos pithos-%{version} -r 206
-# tar -cjf pithos-%{version}.tar.bz2 pithos-%{version}/
-Source0:        pithos-%{version}.tar.bz2
+# COMMIT=%{commit}
+# wget -O "kevinmehall-pithos-${COMMIT}.tar.gz" \
+#   "https://github.com/kevinmehall/pithos/tarball/${COMMIT}"
+Source0:        kevinmehall-pithos-%{commit}.tar.gz
 # Fix desktop icon location
 Patch0:         fix-pithos-desktop.patch
 # Use site-package pylast
 Patch1:         site-package-pylast.patch
-# Fix time sync
-Patch2:         time-sync-hack.patch
 
 BuildArch:      noarch
 BuildRequires:  desktop-file-utils
@@ -41,19 +42,11 @@ things like media key support and song notifications.
 It is recommended that you purchase a Pandora One membership.
 
 %prep
-%setup -q
+%setup -q -n kevinmehall-pithos-%{commit}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
-# Copy desktop file before setup.py mangles it
-cp %{name}.desktop.in %{name}.desktop
 # Fix data path
 sed -i 's|../data/|%{_datadir}/%{name}|g' %{name}/pithosconfig.py
-# Fix non-executable-script error
-sed -i '/^#!\/usr\/bin\/python$/,+1 d' \
-    %{name}/plugin.py \
-    %{name}/plugins/scrobble.py \
-    %{name}/plugins/notification_icon.py
 
 %build
 %{__python} setup.py build
@@ -76,8 +69,12 @@ desktop-file-install --delete-original \
 %{_bindir}/%{name}
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
+%{_docdir}/%{name}
 
 %changelog
+* Tue May 01 2012 Silas Sewell <silas@sewell.org> - 0.3.17-0.1.d66ff7a
+- Update to JSON api version
+
 * Sun Apr 29 2012 Silas Sewell <silas@sewell.org> - 0.3.16-2
 - Get sync time from JJZ's server (James Burton)
 

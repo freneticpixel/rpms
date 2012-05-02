@@ -1,6 +1,6 @@
-diff -up pithos-0.3.16/pithos.desktop.in.orig pithos-0.3.16/pithos.desktop.in
---- pithos-0.3.16/pithos.desktop.in.orig	2012-04-25 12:07:08.428110702 -0400
-+++ pithos-0.3.16/pithos.desktop.in	2012-04-25 12:07:26.947148889 -0400
+diff -up kevinmehall-pithos-d66ff7a/pithos.desktop.orig kevinmehall-pithos-d66ff7a/pithos.desktop
+--- kevinmehall-pithos-d66ff7a/pithos.desktop.orig	2012-05-01 22:10:54.055197040 -0400
++++ kevinmehall-pithos-d66ff7a/pithos.desktop	2012-05-01 22:11:20.709312864 -0400
 @@ -3,6 +3,6 @@ Name=Pithos
  Comment=Play music from Pandora Radio
  Categories=GNOME;AudioVideo;Player;
