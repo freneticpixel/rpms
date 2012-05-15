@@ -1,8 +1,8 @@
-%global commit d66ff7a
+%global commit 07dcbd8
 
 Name:           pithos
 Version:        0.3.17
-Release:        0.1.%{commit}%{?dist}
+Release:        1.%{commit}%{?dist}
 Summary:        A Pandora client for the GNOME Desktop
 
 Group:          Applications/File
@@ -72,6 +72,9 @@ desktop-file-install --delete-original \
 %{_docdir}/%{name}
 
 %changelog
+* Tue May 14 2012 Silas Sewell <silas@sewell.org> - 0.3.17-1.07dcbd8
+- Update to 0.3.17
+
 * Tue May 01 2012 Silas Sewell <silas@sewell.org> - 0.3.17-0.1.d66ff7a
 - Update to JSON api version
 
