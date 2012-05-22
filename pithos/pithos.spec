@@ -8,9 +8,7 @@ Summary:        A Pandora client for the GNOME Desktop
 Group:          Applications/File
 License:        GPLv3
 URL:            http://kevinmehall.net/p/pithos/
-# COMMIT=%{commit}
-# wget -O "kevinmehall-pithos-${COMMIT}.tar.gz" \
-#   "https://github.com/kevinmehall/pithos/tarball/${COMMIT}"
+# COMMIT=%{commit} wget -O "kevinmehall-pithos-${COMMIT}.tar.gz" "https://github.com/kevinmehall/pithos/tarball/${COMMIT}"
 Source0:        kevinmehall-pithos-%{commit}.tar.gz
 # Fix desktop icon location
 Patch0:         fix-pithos-desktop.patch
