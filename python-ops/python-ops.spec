@@ -1,23 +1,23 @@
 %global realname ops
 
 Name:           python-%{realname}
-Version:        0.2.0
+Version:        0.4.5
 Release:        1%{?dist}
-Summary:        Python modules and tools for system applications
+Summary:        Library for scripting systems administration tasks
 
 Group:          Development/Languages
 License:        MIT
-URL:            https://github.com/opsdojo/ops
-Source0:        http://pypi.python.org/packages/source/o/ops/ops-%{version}.tar.bz2
+URL:            https://github.com/silas/ops
+Source0:        http://pypi.python.org/packages/source/o/ops/ops-%{version}.tar.gz
 
 BuildArch:      noarch
 BuildRequires:  python-devel
 BuildRequires:  python-nose
 BuildRequires:  python-sphinx
+Requires:       python
 
 %description
-ops is a collection of Python modules and tools that makes building and running
-system applications a little easier.
+ops is a library for scripting systems administration tasks in Python.
 
 %prep
 %setup -q -n %{realname}-%{version}
@@ -29,16 +29,19 @@ pushd docs; make html; popd
 %install
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
 
-%check
-nosetests
-
 %files
 %defattr(-,root,root,-)
 %doc LICENSE README.md docs/build/html
-%{python_sitelib}/%{realname}
+%{python_sitelib}/%{realname}.py*
 %{python_sitelib}/%{realname}-%{version}-py*.egg-info
 
 %changelog
+* Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.4.5-1
+- Version 0.4.5
+
+* Thu Jul 05 2012 Silas Sewell <silas@sewell.org> - 0.4.4-1
+- Version 0.4.4
+
 * Thu Jan 27 2011 Silas Sewell <silas@sewell.ch> - 0.2.0-1
 - Add settings module
 - Remove utils.dir, utils.pushd, and utils.popd
