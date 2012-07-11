@@ -1,5 +1,5 @@
 Name:           brpm
-Version:        0.4.0
+Version:        0.4.1
 Release:        1%{?dist}
 Summary:        Build rpms
 
@@ -12,7 +12,7 @@ BuildArch:      noarch
 BuildRequires:  python-devel
 Requires:       mock
 Requires:       rpm-build
-Requires:       python-ops >= 0.4.4
+Requires:       python-ops >= 0.4.5
 
 %description
 A simple tool for building RPMs.
@@ -34,5 +34,8 @@ A simple tool for building RPMs.
 %{python_sitelib}/%{name}-%{version}-py*.egg-info
 
 %changelog
+* Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.4.1-1
+- Update to version 0.4.1
+
 * Thu Jul 05 2012 Silas Sewell <silas@sewell.org> - 0.4.0-1
 - Initial build
