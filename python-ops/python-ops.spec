@@ -1,7 +1,7 @@
 %global realname ops
 
 Name:           python-%{realname}
-Version:        0.4.5
+Version:        0.4.6
 Release:        1%{?dist}
 Summary:        Library for scripting systems administration tasks
 
@@ -36,6 +36,9 @@ pushd docs; make html; popd
 %{python_sitelib}/%{realname}-%{version}-py*.egg-info
 
 %changelog
+* Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.4.6-1
+- Version 0.4.6
+
 * Wed Jul 11 2012 Silas Sewell <silas@sewell.org> - 0.4.5-1
 - Version 0.4.5
 
