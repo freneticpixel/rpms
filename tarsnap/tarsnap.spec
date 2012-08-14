@@ -1,5 +1,5 @@
 Name:             tarsnap
-Version:          1.0.31
+Version:          1.0.33
 Release:          1%{?dist}
 Summary:          Online backups for the truly paranoid
 
@@ -57,5 +57,8 @@ rm -fr %{buildroot}
 %{_sysconfdir}/%{name}
 
 %changelog
+* Tue Aug 14 2012 Silas Sewell <silas@sewell.org> - 1.0.33-1
+- Update to 1.0.33
+
 * Mon Feb 13 2012 Silas Sewell <silas@sewell.org> - 1.0.31-1
 - Initial build
