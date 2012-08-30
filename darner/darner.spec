@@ -56,11 +56,11 @@ install -d -m 755 %{buildroot}%{_sharedstatedir}/%{name}
 rm -fr %{buildroot}
 
 %post
-/sbin/chkconfig --add darner
-%systemd_post darner.service
+if [ $1 -eq 1 ] ; then
+  systemctl daemon-reload >/dev/null 2>&1 || :
+fi
 
 %pre
-%systemd_preun darner.service
 getent group darner &> /dev/null || groupadd -r darner &> /dev/null
 getent passwd darner &> /dev/null || \
 useradd -r -g darner -d %{_sharedstatedir}/darner -s /sbin/nologin \
@@ -68,7 +68,16 @@ useradd -r -g darner -d %{_sharedstatedir}/darner -s /sbin/nologin \
 exit 0
 
 %preun
-%systemd_postun_with_restart darner.service 
+if [ $1 -eq 0 ] ; then
+  systemctl --no-reload disable darner.service > /dev/null 2>&1 || :
+  systemctl stop darner.service > /dev/null 2>&1 || :
+fi
+
+%postun
+systemctl daemon-reload >/dev/null 2>&1 || :
+if [ $1 -ge 1 ] ; then
+  systemctl try-restart darner.service >/dev/null 2>&1 || :
+fi
 
 %files
 %defattr(-,root,root,-)
