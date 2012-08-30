@@ -1,0 +1,12 @@
+diff -up wavii-darner-2dd8482/CMakeLists.txt.orig wavii-darner-2dd8482/CMakeLists.txt
+--- wavii-darner-2dd8482/CMakeLists.txt.orig	2012-08-30 00:38:50.102745881 -0400
++++ wavii-darner-2dd8482/CMakeLists.txt	2012-08-30 00:39:01.489793060 -0400
+@@ -38,7 +38,7 @@ ADD_EXECUTABLE(test
+ FIND_PACKAGE(Boost 1.46.1 COMPONENTS thread system program_options unit_test_framework filesystem)
+ 
+ TARGET_LINK_LIBRARIES(darner pthread ${Boost_LIBRARIES} leveldb snappy)
+-TARGET_LINK_LIBRARIES(db ${Boost_LIBRARIES})
++TARGET_LINK_LIBRARIES(db pthread ${Boost_LIBRARIES})
+ TARGET_LINK_LIBRARIES(test pthread ${Boost_LIBRARIES} leveldb snappy)
+ 
+ INSTALL(TARGETS darner DESTINATION bin)

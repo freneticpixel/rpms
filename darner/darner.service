@@ -1,0 +1,11 @@
+[Unit]
+Description=A simple message queue server
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/darner -c /etc/darner.conf
+User=darner
+Group=darner
+
+[Install]
+WantedBy=multi-user.target
