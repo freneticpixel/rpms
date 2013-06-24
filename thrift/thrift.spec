@@ -42,6 +42,7 @@ URL:              http://incubator.apache.org/thrift
 Source0:          http://www.apache.org/dist//incubator/thrift/%{version}-incubating/thrift-%{version}.tar.gz
 Source1:          thrift_protocol.ini
 Patch0:           thrift-0.5.0-noivy.patch
+Patch1:           thrify-0.5.0-zend.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:    byacc
@@ -203,12 +204,15 @@ Perl bindings for %{name}.
 %package php
 Summary:          PHP bindings for %{name}
 Group:            Development/Libraries
+
 BuildRequires:    php54-devel
 %if 0%{?php_zend_api}
 BuildRequires:    php54-devel
 Requires:         php(zend-abi) = %{php_zend_api}
 Requires:         php(api) = %{php_core_api}
 %endif
+
+%patch1 -p1
 
 %description php
 PHP bindings for %{name}.
