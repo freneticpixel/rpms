@@ -1,10 +1,6 @@
-%if 0%{?fedora} > 11
-%global with_java 1
-%global with_php 1
-%else
 %global with_java 0
-%global with_php 0
-%endif
+%global with_php 1
+
 
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
