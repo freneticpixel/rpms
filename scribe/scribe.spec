@@ -87,14 +87,15 @@ Python bindings for %{name}.
 %{_libdir}/libscribe.so
 %{_sysconfdir}/rc.d/init.d/scribed
 %{_bindir}/scribe_ctrl
+/usr/lib/libdynamicbucketupdater.so
+/usr/lib/libscribe.so
 
 %files python
 %defattr(-,root,root,-)
 %doc LICENSE
 %{python_sitelib}/%{name}
-%if 0%{?fedora}  > 9
 %{python_sitelib}/%{name}-*.egg-info
-%endif
+
 %{_bindir}/scribe_cat
 
 %post
