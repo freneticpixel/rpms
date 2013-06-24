@@ -212,7 +212,7 @@ Requires:         php(zend-abi) = %{php_zend_api}
 Requires:         php(api) = %{php_core_api}
 %endif
 
-%patch1 -p1
+
 
 %description php
 PHP bindings for %{name}.
@@ -243,6 +243,7 @@ Ruby bindings for %{name}.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 # Fix spurious-executable-perm warning
 find tutorial/ -type f -exec chmod 0644 {} \;
