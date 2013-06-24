@@ -5,7 +5,7 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:             fb303
-Version:          0.2.0
+Version:          0.5.0
 Release:          1%{?dist}
 Summary:          Facebook Bassline
 
