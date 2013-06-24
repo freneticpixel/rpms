@@ -42,7 +42,7 @@ URL:              http://incubator.apache.org/thrift
 Source0:          http://www.apache.org/dist//incubator/thrift/%{version}-incubating/thrift-%{version}.tar.gz
 Source1:          thrift_protocol.ini
 Patch0:           thrift-0.5.0-noivy.patch
-Patch1:           thrify-0.5.0-zend.patch
+Patch1:           thrift-0.5.0-zend.patch
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:    byacc
