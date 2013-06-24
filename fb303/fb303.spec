@@ -151,9 +151,7 @@ popd
 %doc README
 %{python_sitelib}/%{name}
 %{python_sitelib}/%{name}_scripts
-%if 0%{?fedora}  > 9
 %{python_sitelib}/%{name}-*.egg-info
-%endif
 
 %changelog
 * Wed Mar 03 2010 Silas Sewell <silas@sewell.ch> - 0.2.0-1
