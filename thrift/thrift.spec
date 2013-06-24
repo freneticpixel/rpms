@@ -483,6 +483,7 @@ fi
 %if 0%{?fedora}  > 9
 %{python_sitearch}/Thrift-*.egg-info
 %endif
+%endif
 
 %if 0%{?with_ruby}
 %files ruby
