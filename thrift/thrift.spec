@@ -310,8 +310,10 @@ popd
 # Remove "la" files
 find %{buildroot} -type f -name "*.la" -exec rm -f {} ';'
 
+%if 0%{?with_python}
 # Fix non-standard-executable-perm
 %{__chmod} 0755 %{buildroot}%{python_sitearch}/%{name}/protocol/fastbinary.so
+%endif
 
 %if 0%{?with_csharp}
 # Install C#
