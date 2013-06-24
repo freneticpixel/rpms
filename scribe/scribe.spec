@@ -1,8 +1,4 @@
-%if 0%{?fedora} > 10
 %global with_boost_patch 0
-%else
-%global with_boost_patch 1
-%endif
 
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
