@@ -1,7 +1,7 @@
 %global with_csharp 0
 %global with_ghc 0
 %global with_perl 0
-%global with_python 0
+%global with_python 1
 %global with_ruby 0
 %global with_java 0
 %global with_php 1
