@@ -100,6 +100,10 @@ Python bindings for %{name}.
 
 %post
 /sbin/chkconfig --add scribed
+/sbin/ldconfig
+
+$postun
+/sbin/ldconfig
 
 %preun
 if [ $1 = 0 ]; then
