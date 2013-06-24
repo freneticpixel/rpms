@@ -5,3 +5,5 @@
 *.tgz
 build
 tmp
+.idea
+*.iml

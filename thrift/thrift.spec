@@ -1,14 +1,12 @@
-%if 0%{?fedora} > 12
-%global with_csharp 0
-%global with_ghc 1
-%global with_java 1
-%global with_php 1
-%else
 %global with_csharp 0
 %global with_ghc 0
-%global with_java 0
-%global with_php 0
-%endif
+%global with_perl 0
+%global with_python 0
+%global with_ruby 0
+%global with_ghc 0
+%global with_java 1
+%global with_php 1
+
 
 # Erlang
 %global erlangdir %{_libdir}/erlang
@@ -90,6 +88,7 @@ ExcludeArch:      sparc64
 C# bindings for %{name}.
 %endif
 
+%if 0%{?with_erlang}
 %package erlang
 Summary:          Erlang bindings for %{name}
 Group:            Development/Libraries
@@ -97,6 +96,7 @@ BuildRequires:    erlang
 
 %description erlang
 Erlang bindings for %{name}.
+%endif
 
 %if 0%{?with_ghc}
 %package ghc
@@ -213,6 +213,7 @@ Requires:         php(api) = %{php_core_api}
 PHP bindings for %{name}.
 %endif
 
+%if 0%{?with_python}
 %package python
 Summary:          Python bindings for %{name}
 Group:            Development/Libraries
@@ -220,7 +221,9 @@ BuildRequires:    python-devel
 
 %description python
 Python bindings for %{name}.
+%endif
 
+%if 0%{?with_ruby}
 %package ruby
 Summary:          Ruby bindings for %{name}
 Group:            Development/Libraries
@@ -230,6 +233,7 @@ Requires:         ruby(abi) = 1.8
 
 %description ruby
 Ruby bindings for %{name}.
+%endif
 
 %prep
 %setup -q
@@ -265,11 +269,13 @@ ant dist javadoc -lib %{_javadir} -lib %{_javadir}/slf4j -Dnoivy=1
 popd
 %endif
 
+%if 0%{?with_perl}
 # Build Perl
 pushd lib/perl
 perl Makefile.PL
 %{__make} %{?_smp_mflags} CFLAGS="%{optflags}"
 popd
+%endif
 
 # Build PHP
 %if 0%{?with_php}
@@ -280,11 +286,13 @@ phpize
 popd
 %endif
 
+%if 0%{?with_ruby}
 # Build Ruby
 pushd lib/rb
 ruby setup.rb config
 ruby setup.rb setup
 popd
+%endif
 
 %install
 %{__rm} -rf %{buildroot}
@@ -336,6 +344,8 @@ popd
            %{buildroot}%{_datadir}/php/%{name}/
 %endif
 
+%if 0%{?with_perl}
+
 # Install Perl
 pushd lib/perl
 %{__make} DESTDIR=%{buildroot} INSTALLSITELIB=%{perl_vendorlib} install
@@ -345,7 +355,9 @@ popd
 find %{buildroot} -type f -name .packlist -exec rm -f {} \;
 find %{buildroot} -type f -name perllocal.pod -exec rm -f {} \;
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null \;
+%endif
 
+%if 0%{?with_ruby}
 # Install Ruby
 pushd lib/rb
 ruby setup.rb install --prefix=%{buildroot}
@@ -353,6 +365,7 @@ popd
 
 # Fix non-standard-executable-perm error
 %{__chmod} 0755 %{buildroot}%{ruby_sitearch}/thrift_native.so
+%endif
 
 %clean
 %{__rm} -rf %{buildroot}
@@ -408,10 +421,12 @@ fi
 %{_libdir}/mono/thrift
 %endif
 
+%if 0%{?with_erlang}
 %files erlang
 %defattr(-,root,root,-)
 %doc lib/erl/README tutorial/erl tutorial/*.thrift
 %{erlangdir}/lib/%{name}-%{version}
+%endif
 
 %if 0%{?with_ghc}
 %files ghc -f lib/hs/ghc-Thrift.files
@@ -440,10 +455,12 @@ fi
 %{_javadocdir}/thrift
 %endif
 
+%if 0%{?with_perl}
 %files perl
 %defattr(-,root,root,-)
 %doc lib/perl/README tutorial/perl tutorial/*.thrift
 %{perl_vendorlib}/Thrift*
+%endif
 
 %if 0%{?with_php}
 %files php
@@ -454,6 +471,7 @@ fi
 %{php_extdir}/thrift_protocol.so
 %endif
 
+%if 0%{?with_python}
 %files python
 %defattr(-,root,root,-)
 %doc lib/py/README tutorial/py tutorial/*.thrift
@@ -462,11 +480,13 @@ fi
 %{python_sitearch}/Thrift-*.egg-info
 %endif
 
+%if 0%{?with_ruby}
 %files ruby
 %defattr(-,root,root,-)
 %doc lib/rb/CHANGELOG lib/rb/README tutorial/rb tutorial/*.thrift
 %{ruby_sitearch}/thrift_native.so
 %{ruby_sitelib}/thrift*
+%endif
 
 %changelog
 * Tue Nov 02 2010 Silas Sewell <silas@sewell.ch> - 0.5.0-1
