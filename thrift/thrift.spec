@@ -258,7 +258,6 @@ sed -i '/#/d;/^$/d' lib/hs/Setup.lhs
   --without-perl \
   --without-ruby \
   --without-perl \
-  --without-python \
   --without-ruby \
   --enable-static=no
 %{__make} %{?_smp_mflags}
