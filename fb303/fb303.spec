@@ -12,7 +12,7 @@ Summary:          Facebook Bassline
 Group:            Development/Libraries
 License:          ASL 2.0
 URL:              http://incubator.apache.org/thrift
-Source0:          http://www.apache.org/dist/incubator/thrift/%{version}-incubating/thrift-%{version}-incubating.tar.gz
+Source0:          http://www.apache.org/dist/incubator/thrift/%{version}-incubating/thrift-%{version}.tar.gz
 BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:    automake
@@ -66,7 +66,7 @@ Python bindings for %{name}.
 %package php
 Summary:          PHP bindings for %{name}
 Group:            Development/Libraries
-BuildRequires:    php-devel
+BuildRequires:    php54-devel
 Requires:         thrift-php = %{version}
 
 %description php
