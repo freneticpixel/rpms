@@ -9,7 +9,7 @@
 %global config_opts --disable-static --with-thriftpath=%{_prefix} --with-fb303path=%{_prefix} --with-boost-system=boost_system --with-boost-filesystem=boost_filesystem
 
 Name:             scribe
-Version:          2.1
+Version:          master
 Release:          1%{?dist}
 Summary:          A server for aggregating log data streamed in real time
 
@@ -20,7 +20,7 @@ Source0:          https://github.com/freneticpixel/scribe/archive/master.zip
 Source1:          scribed.init
 Source2:          scribed.sysconfig
 Patch0:           scribe.2.1.patch
-BuildRoot:        %{_tmppath}/master.zip
+BuildRoot:        %{_tmppath}/scribe-master.zip
 
 BuildRequires:    automake
 %if %{with_boost_patch}
