@@ -50,7 +50,6 @@ BuildRequires:    dos2unix
 BuildRequires:    flex
 BuildRequires:    libevent-devel
 BuildRequires:    libtool
-BuildRequires:    mono-devel >= 1.2.6
 BuildRequires:    zlib-devel
 
 %description
@@ -82,6 +81,7 @@ Summary:          C# bindings for %{name}
 Group:            Development/Libraries
 # sparc64 doesn't have mono
 ExcludeArch:      sparc64
+BuildRequires:    mono-devel >= 1.2.6
 
 %description csharp
 C# bindings for %{name}.
