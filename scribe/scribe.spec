@@ -16,7 +16,7 @@ Summary:          A server for aggregating log data streamed in real time
 Group:            Development/Libraries
 License:          ASL 2.0
 URL:              http://developers.facebook.com/scribe
-Source0:          https://github.com/freneticpixel/scribe/archive/master.zip
+Source0:          https://github.com/freneticpixel/scribe/archive/scribe-master.zip
 Source1:          scribed.init
 Source2:          scribed.sysconfig
 Patch0:           scribe.2.1.patch
