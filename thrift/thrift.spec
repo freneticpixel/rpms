@@ -203,9 +203,9 @@ Perl bindings for %{name}.
 %package php
 Summary:          PHP bindings for %{name}
 Group:            Development/Libraries
-BuildRequires:    php-devel
+BuildRequires:    php54-devel
 %if 0%{?php_zend_api}
-BuildRequires:    php-devel
+BuildRequires:    php54-devel
 Requires:         php(zend-abi) = %{php_zend_api}
 Requires:         php(api) = %{php_core_api}
 %endif
@@ -251,7 +251,6 @@ sed -i '/#/d;/^$/d' lib/hs/Setup.lhs
   --without-haskell \
   --without-java \
   --without-perl \
-  --without-php \
   --without-ruby \
   --without-perl \
   --without-python \
