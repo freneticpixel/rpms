@@ -354,7 +354,6 @@ popd
 pushd lib/perl
 %{__make} DESTDIR=%{buildroot} INSTALLSITELIB=%{perl_vendorlib} install
 popd
-%endif
 
 # Cleanup Perl install
 find %{buildroot} -type f -name .packlist -exec rm -f {} \;
