@@ -479,6 +479,7 @@ fi
 %config(noreplace) %{_sysconfdir}/php.d/thrift_protocol.ini
 %{_datadir}/php/%{name}
 %{php_extdir}/thrift_protocol.so
+/usr/lib/php/*
 %endif
 
 %if 0%{?with_python}
