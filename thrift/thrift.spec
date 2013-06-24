@@ -3,7 +3,6 @@
 %global with_perl 0
 %global with_python 0
 %global with_ruby 0
-%global with_ghc 0
 %global with_java 1
 %global with_php 1
 
@@ -182,6 +181,7 @@ BuildRequires:    java-1.6.0-openjdk-javadoc
 Javadoc for %{name}.
 %endif
 
+%if 0%{?with_perl}
 %package perl
 Summary:          Perl bindings for %{name}
 Group:            Development/Libraries
@@ -197,6 +197,7 @@ Provides:         perl(Thrift) = %{version}-%{release}
 
 %description perl
 Perl bindings for %{name}.
+%endif
 
 %if 0%{?with_php}
 %package php
@@ -251,6 +252,9 @@ sed -i '/#/d;/^$/d' lib/hs/Setup.lhs
   --without-java \
   --without-perl \
   --without-php \
+  --without-ruby \
+  --without-perl \
+  --without-python \
   --without-ruby \
   --enable-static=no
 %{__make} %{?_smp_mflags}
@@ -350,6 +354,7 @@ popd
 pushd lib/perl
 %{__make} DESTDIR=%{buildroot} INSTALLSITELIB=%{perl_vendorlib} install
 popd
+%endif
 
 # Cleanup Perl install
 find %{buildroot} -type f -name .packlist -exec rm -f {} \;
