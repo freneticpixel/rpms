@@ -117,7 +117,7 @@ thrift -o %{buildroot}%{_datadir}/php/thrift/ -I %{buildroot}%{_datadir} -gen ph
 %{__mv} %{buildroot}/usr/lib/libfb303.so %{buildroot}%{_libdir}/libfb303.so || true
 
 %clean
-%{__rm} -rf %{buildroot}
+#%{__rm} -rf %{buildroot}
 
 %post -p /sbin/ldconfig
 
