@@ -107,7 +107,7 @@ sed -i -e 's/^AM_CPPFLAGS = /AM_CPPFLAGS = -DHAVE_NETINET_IN_H -DHAVE_INTTYPES_H
 
 %files php
 %defattr(-,root,root,-)
-%{_datadir}/php/%{name}/*.php
+%{_datadir}/php/thrift/packages/%{name}/*.php
 
 %post
 /sbin/chkconfig --add scribed
