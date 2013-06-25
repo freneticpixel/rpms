@@ -108,7 +108,7 @@ popd
 
 # Install PHP
 %if %{with_php}
-#%{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages/%{name}
+%{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages
 thrift -o %{buildroot}%{_datadir}/php/thrift/packages -I %{buildroot}%{_datadir} -gen php %{buildroot}%{_datadir}/fb303/if/fb303.thrift
 mv %{buildroot}%{_datadir}/php/thrift/packages/gen-php %{buildroot}%{_datadir}/php/thrift/packages/fb303
 %{__cp} -r php/FacebookBase.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}
