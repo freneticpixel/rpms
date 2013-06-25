@@ -77,8 +77,8 @@ sed -i -e 's/^AM_CPPFLAGS = /AM_CPPFLAGS = -DHAVE_NETINET_IN_H -DHAVE_INTTYPES_H
 
 # PHP
 %{__mkdir_p} %{buildroot}%{_datadir}/php/%{name}
-%{__cp} -r ./src/gen-php/%{name}/scribe.php %{buildroot}%{_datadir}/php/%{name}/
-%{__cp} -r ./src/gen-php/%{name}/scribe_types.php %{buildroot}%{_datadir}/php/%{name}/
+%{__cp} -r ./src/gen-php/%{name}/scribe.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}/
+%{__cp} -r ./src/gen-php/%{name}/scribe_types.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}/
 
 # Remove scripts
 %{__rm} ./examples/scribe_*
