@@ -110,7 +110,7 @@ popd
 %if %{with_php}
 %{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages
 thrift -o %{buildroot}%{_datadir}/php/thrift/packages -I %{buildroot}%{_datadir} -gen php %{buildroot}%{_datadir}/fb303/if/fb303.thrift
-mv %{buildroot}%{_datadir}/php/thrift/packages/gen-php %{buildroot}%{_datadir}/php/thrift/packages/fb303
+mv %{buildroot}%{_datadir}/php/thrift/packages/gen-php/fb303 %{buildroot}%{_datadir}/php/thrift/packages/
 %{__cp} -r php/FacebookBase.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}
 %endif
 
@@ -118,7 +118,7 @@ mv %{buildroot}%{_datadir}/php/thrift/packages/gen-php %{buildroot}%{_datadir}/p
 %{__mv} %{buildroot}/usr/lib/libfb303.so %{buildroot}%{_libdir}/libfb303.so || true
 
 %clean
-#%{__rm} -rf %{buildroot}
+%{__rm} -rf %{buildroot}
 
 %post -p /sbin/ldconfig
 
