@@ -111,6 +111,7 @@ popd
 %{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages
 thrift -o %{buildroot}%{_datadir}/php/thrift/packages -I %{buildroot}%{_datadir} -gen php %{buildroot}%{_datadir}/fb303/if/fb303.thrift
 mv %{buildroot}%{_datadir}/php/thrift/packages/gen-php/fb303 %{buildroot}%{_datadir}/php/thrift/packages/
+rmdir %{buildroot}%{_datadir}/php/thrift/packages/gen-php
 %{__cp} -r php/FacebookBase.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}
 %endif
 
