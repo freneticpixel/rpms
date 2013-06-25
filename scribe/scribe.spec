@@ -1,4 +1,3 @@
-%global with_boost_patch 0
 
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
@@ -15,15 +14,10 @@ URL:              http://developers.facebook.com/scribe
 Source0:          https://github.com/freneticpixel/scribe/archive/scribe-master.zip
 Source1:          scribed.init
 Source2:          scribed.sysconfig
-Patch0:           scribe.2.1.patch
 BuildRoot:        %{_tmppath}/scribe-master.zip
 
 BuildRequires:    automake
-%if %{with_boost_patch}
-BuildRequires:    boost-devel >= 1.33
-%else
 BuildRequires:    boost-devel >= 1.36
-%endif
 BuildRequires:    fb303-devel
 BuildRequires:    libevent-devel
 BuildRequires:    thrift
@@ -48,13 +42,22 @@ Requires:         fb303-python
 %description python
 Python bindings for %{name}.
 
+%package php
+Summary:          PHP bindings for %{name}
+Group:            Development/Libraries
+Requires:         fb303-php
+
+%description php
+PHP bindings for %{name}.
+
 %prep
 %setup -q
-%if %{with_boost_patch}
-%patch0 -p1
-%endif
 
 %build
+# Fix compile errors from mismatched return enum-based return types
+sed -i -e 's/ --cpp --py --php/ --gen cpp:pure_enums --gen py --gen php/' src/Makefile.am
+# Fix compile errors from netinet/in.h and inttypes.h not being included
+sed -i -e 's/^AM_CPPFLAGS = /AM_CPPFLAGS = -DHAVE_NETINET_IN_H -DHAVE_INTTYPES_H /' src/Makefile.am
 ./bootstrap.sh %{config_opts}
 %configure %{config_opts}
 %{__make} %{?_smp_mflags}
@@ -71,6 +74,11 @@ Python bindings for %{name}.
 %{__install} -D -m 644 ./examples/example1.conf %{buildroot}%{_sysconfdir}/scribed/default.conf
 %{__install} -D -m 755 %{SOURCE1} %{buildroot}%{_sysconfdir}/rc.d/init.d/scribed
 %{__install} -D -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/scribed
+
+# PHP
+%{__mkdir_p} %{buildroot}%{_datadir}/php/%{name}
+%{__cp} -r ./src/gen-php/%{name}/scribe.php %{buildroot}%{_datadir}/php/%{name}/
+%{__cp} -r ./src/gen-php/%{name}/scribe_types.php %{buildroot}%{_datadir}/php/%{name}/
 
 # Remove scripts
 %{__rm} ./examples/scribe_*
@@ -95,8 +103,11 @@ Python bindings for %{name}.
 %doc LICENSE
 %{python_sitelib}/%{name}
 %{python_sitelib}/%{name}-*.egg-info
-
 %{_bindir}/scribe_cat
+
+%files php
+%defattr(-,root,root,-)
+%{_datadir}/php/%{name}/*.php
 
 %post
 /sbin/chkconfig --add scribed
