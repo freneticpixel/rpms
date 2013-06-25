@@ -88,6 +88,8 @@ cd ./contrib/fb303
 %configure --enable-static=no --with-thriftpath=%{_prefix}
 %{__make} %{?_smp_mflags}
 
+
+
 %install
 %{__rm} -rf %{buildroot}
 cd ./contrib/fb303
@@ -106,8 +108,9 @@ popd
 
 # Install PHP
 %if %{with_php}
-%{__mkdir_p} %{buildroot}%{_datadir}/php/%{name}
-%{__cp} -r php/FacebookBase.php %{buildroot}%{_datadir}/php/%{name}/
+%{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages/%{name}
+thrift -o  %{_datadir}/php/thrift/ -I /usr/share -gen php /usr/share/fb303/if/fb303.thrift
+%{__cp} -r php/FacebookBase.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}
 %endif
 
 # Fix lib install path on x86_64
