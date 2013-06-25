@@ -76,7 +76,7 @@ sed -i -e 's/^AM_CPPFLAGS = /AM_CPPFLAGS = -DHAVE_NETINET_IN_H -DHAVE_INTTYPES_H
 %{__install} -D -m 644 %{SOURCE2} %{buildroot}%{_sysconfdir}/sysconfig/scribed
 
 # PHP
-%{__mkdir_p} %{buildroot}%{_datadir}/php/%{name}
+%{__mkdir_p} %{buildroot}%{_datadir}/php/thrift/packages/%{name}
 %{__cp} -r ./src/gen-php/%{name}/scribe.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}/
 %{__cp} -r ./src/gen-php/%{name}/scribe_types.php %{buildroot}%{_datadir}/php/thrift/packages/%{name}/
 
