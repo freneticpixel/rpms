@@ -146,7 +146,7 @@ thrift -o %{buildroot}%{_datadir}/php/thrift/ -I %{buildroot}%{_datadir} -gen ph
 %files php
 %defattr(-,root,root,-)
 %doc README
-%{_datadir}/php/%{name}
+%{_datadir}/php/
 %endif
 
 %files python
